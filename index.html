@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroSense | AI Wearable Monitoring</title>
+
+<meta name="description"
+content="NeuroSense – AI-Based Wearable Monitoring and Emergency Alert System for Autism.">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #14233b;
+    background: #f7fbff;
+    line-height: 1.6;
+}
+
+/* ================= NAVBAR ================= */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255,255,255,0.96);
+    border-bottom: 1px solid #dce7f2;
+    backdrop-filter: blur(10px);
+}
+
+.navbar {
+    width: 92%;
+    max-width: 1150px;
+    margin: auto;
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 20px;
+    font-weight: 800;
+    color: #082b63;
+}
+
+.logo-box {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    font-weight: bold;
+
+    background: linear-gradient(135deg,#082b63,#1267c7);
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: #43546b;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #1267c7;
+}
+
+/* ================= BUTTON ================= */
+
+.btn {
+    display: inline-block;
+
+    padding: 12px 20px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+    font-weight: bold;
+
+    transition: 0.25s;
+}
+
+.btn-primary {
+    background: #1267c7;
+    color: white;
+
+    box-shadow: 0 8px 20px rgba(18,103,199,0.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    background: #0b56aa;
+}
+
+.btn-secondary {
+    background: white;
+    border: 1px solid #d9e5f2;
+    color: #082b63;
+}
+
+.btn-secondary:hover {
+    border-color: #1267c7;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    padding: 80px 0;
+
+    background:
+        radial-gradient(circle at 85% 10%,#dceeff,transparent 35%),
+        linear-gradient(180deg,#ffffff,#f4faff);
+}
+
+.container {
+    width: 92%;
+    max-width: 1120px;
+    margin: auto;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 55px;
+
+    align-items: center;
+}
+
+.eyebrow {
+    color: #1267c7;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+h1 {
+    margin-top: 15px;
+
+    font-size: clamp(42px,6vw,70px);
+
+    line-height: 1.03;
+
+    color: #082b63;
+}
+
+.hero-text {
+    margin: 22px 0;
+
+    max-width: 650px;
+
+    font-size: 18px;
+
+    color: #607089;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.hero-image {
+    background: white;
+
+    padding: 12px;
+
+    border-radius: 25px;
+
+    border: 1px solid #d9e5f2;
+
+    box-shadow: 0 25px 70px rgba(8,43,99,0.15);
+}
+
+.hero-image img {
+    width: 100%;
+
+    border-radius: 18px;
+
+    display: block;
+}
+
+/* ================= TRUST BAR ================= */
+
+.trust {
+    padding: 18px 0;
+
+    background: white;
+
+    border-top: 1px solid #d9e5f2;
+    border-bottom: 1px solid #d9e5f2;
+}
+
+.trust-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+
+    color: #52627a;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+
+    max-width: 750px;
+
+    margin: 0 auto 45px;
+}
+
+.section-title h2 {
+    margin: 10px 0;
+
+    font-size: 38px;
+
+    line-height: 1.15;
+
+    color: #082b63;
+}
+
+.section-title p {
+    color: #607089;
+}
+
+/* ================= CARDS ================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 20px;
+}
+
+.card {
+    padding: 26px;
+
+    background: white;
+
+    border: 1px solid #d9e5f2;
+
+    border-radius: 20px;
+
+    box-shadow: 0 12px 35px rgba(8,43,99,0.05);
+
+    transition: 0.25s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 20px 40px rgba(8,43,99,0.1);
+}
+
+.icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #eaf4ff;
+
+    color: #1267c7;
+
+    font-size: 22px;
+
+    margin-bottom: 17px;
+}
+
+.card h3 {
+    color: #082b63;
+
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #607089;
+
+    font-size: 14px;
+}
+
+/* ================= SENSORS ================= */
+
+.blue-section {
+    background: #eef7ff;
+}
+
+.sensor-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4,1fr);
+
+    gap: 15px;
+}
+
+.sensor {
+    background: white;
+
+    border: 1px solid #d9e5f2;
+
+    border-radius: 17px;
+
+    padding: 22px;
+}
+
+.sensor strong {
+    display: block;
+
+    color: #082b63;
+
+    margin-bottom: 5px;
+}
+
+.sensor span {
+    font-size: 13px;
+
+    color: #607089;
+}
+
+/* ================= SPLIT ================= */
+
+.split {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 50px;
+
+    align-items: center;
+}
+
+.split-image {
+    background: white;
+
+    padding: 12px;
+
+    border-radius: 24px;
+
+    border: 1px solid #d9e5f2;
+}
+
+.split-image img {
+    width: 100%;
+
+    border-radius: 16px;
+}
+
+.feature-list {
+    display: grid;
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+.feature-item {
+    display: flex;
+
+    gap: 13px;
+}
+
+.tick {
+    width: 26px;
+    height: 26px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #e2f8ef;
+
+    color: #12845d;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+.feature-item strong {
+    display: block;
+
+    color: #082b63;
+}
+
+.feature-item span {
+    color: #607089;
+
+    font-size: 14px;
+}
+
+/* ================= WORKFLOW ================= */
+
+.workflow {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.step {
+    min-width: 160px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    background: white;
+
+    border: 1px solid #d9e5f2;
+
+    border-radius: 16px;
+}
+
+.step strong {
+    display: block;
+
+    color: #082b63;
+}
+
+.arrow {
+    color: #1267c7;
+
+    font-size: 24px;
+
+    font-weight: bold;
+}
+
+/* ================= APP ================= */
+
+.app {
+    background: #082b63;
+
+    color: white;
+
+    border-radius: 30px;
+
+    padding: 50px;
+}
+
+.app-grid {
+    display: grid;
+
+    grid-template-columns: 1.3fr .7fr;
+
+    gap: 40px;
+
+    align-items: center;
+}
+
+.app h2 {
+    font-size: 40px;
+
+    line-height: 1.15;
+
+    margin: 10px 0;
+}
+
+.app p {
+    color: #c8d8ec;
+
+    max-width: 650px;
+}
+
+.phones {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+}
+
+.phone {
+    width: 120px;
+    height: 240px;
+
+    background: #111827;
+
+    border: 6px solid #273449;
+
+    border-radius: 22px;
+
+    padding: 10px;
+}
+
+.phone-screen {
+    height: 100%;
+
+    padding: 12px;
+
+    border-radius: 13px;
+
+    background: linear-gradient(#f8fcff,#dceeff);
+
+    color: #082b63;
+
+    font-size: 10px;
+}
+
+/* ================= FAQ ================= */
+
+.faq {
+    max-width: 800px;
+
+    margin: auto;
+
+    display: grid;
+
+    gap: 12px;
+}
+
+details {
+    background: white;
+
+    border: 1px solid #d9e5f2;
+
+    border-radius: 14px;
+
+    padding: 18px 20px;
+}
+
+summary {
+    cursor: pointer;
+
+    font-weight: bold;
+
+    color: #082b63;
+}
+
+details p {
+    margin-top: 10px;
+
+    color: #607089;
+
+    font-size: 14px;
+}
+
+/* ================= CONTACT ================= */
+
+.contact {
+    max-width: 850px;
+
+    margin: auto;
+
+    text-align: center;
+}
+
+.contact-box {
+    background: white;
+
+    border: 1px solid #d9e5f2;
+
+    border-radius: 24px;
+
+    padding: 35px;
+
+    box-shadow: 0 15px 45px rgba(8,43,99,0.07);
+}
+
+.socials {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin-top: 25px;
+}
+
+.social {
+    padding: 12px 18px;
+
+    background: white;
+
+    border: 1px solid #d9e5f2;
+
+    border-radius: 12px;
+
+    color: #082b63;
+
+    font-weight: bold;
+
+    text-decoration: none;
+
+    transition: .2s;
+}
+
+.social:hover {
+    border-color: #1267c7;
+
+    color: #1267c7;
+
+    transform: translateY(-2px);
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    padding: 40px 0;
+
+    background: #061d43;
+
+    color: #c6d5e9;
+}
+
+.footer-content {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    flex-wrap: wrap;
+}
+
+footer strong {
+    color: white;
+}
+
+footer a {
+    color: #c6d5e9;
+
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: white;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:850px) {
+
+    nav {
+        display: none;
+    }
+
+    .hero-grid,
+    .split,
+    .app-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .sensor-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .app {
+        padding: 30px 22px;
+    }
+}
+
+@media(max-width:500px) {
+
+    .sensor-grid {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 44px;
+    }
+
+    .section-title h2 {
+        font-size: 31px;
+    }
+
+    .hero {
+        padding: 55px 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header>
+
+<div class="navbar">
+
+<a href="#home" class="logo">
+
+<span class="logo-box">NS</span>
+
+NEUROSENSE
+
+</a>
+
+<nav>
+
+<a href="#features">Features</a>
+
+<a href="#sensors">Sensors</a>
+
+<a href="#workflow">How It Works</a>
+
+<a href="#app">Caregiver App</a>
+
+<a href="#contact">Contact</a>
+
+</nav>
+
+<a href="#contact" class="btn btn-primary">
+Contact Us
+</a>
+
+</div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+<div class="container hero-grid">
+
+<div>
+
+<span class="eyebrow">
+AI-Based Wearable Monitoring & Emergency Alert System
+</span>
+
+<h1>
+Understand.<br>
+Alert.<br>
+Support.
+</h1>
+
+<p class="hero-text">
+
+NeuroSense is an AI-based wearable monitoring concept designed
+to continuously observe physiological and environmental signals
+and provide timely information to caregivers when patterns
+associated with stress or sensory overload are detected.
+
+</p>
+
+<div class="buttons">
+
+<a href="#features" class="btn btn-primary">
+Discover NeuroSense →
+</a>
+
+<a href="#workflow" class="btn btn-secondary">
+See How It Works
+</a>
+
+</div>
+
+</div>
+
+
+<div class="hero-image">
+
+<!--
+IMPORTANT:
+Upload your image to the repository at:
+
+assets/neurosense-concept.jpg
+
+-->
+
+<img
+src="assets/neurosense-concept.jpg"
+alt="NeuroSense wearable prototype"
+>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= TRUST ================= -->
+
+<div class="trust">
+
+<div class="container trust-row">
+
+<span>♥ Real-time Monitoring</span>
+
+<span>◉ Multimodal Sensors</span>
+
+<span>⚡ AI-Assisted Analysis</span>
+
+<span>🔔 Caregiver Alerts</span>
+
+<span>🔒 Privacy-Focused</span>
+
+</div>
+
+</div>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section id="features">
+
+<div class="container">
+
+<div class="section-title">
+
+<span class="eyebrow">
+Core Capabilities
+</span>
+
+<h2>
+One wearable. Multiple signals. Smarter support.
+</h2>
+
+<p>
+NeuroSense combines physiological and contextual measurements
+to provide a broader picture rather than relying on one signal.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<div class="icon">♥</div>
+
+<h3>
+Physiological Monitoring
+</h3>
+
+<p>
+Monitors heart rate, HRV-related measures, skin conductance,
+temperature and SpO₂ for continuous observation.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">◌</div>
+
+<h3>
+Stress & Overload Detection
+</h3>
+
+<p>
+AI-assisted analysis can combine multiple signals to identify
+patterns that may indicate elevated stress or sensory overload.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🔔</div>
+
+<h3>
+Emergency Alerts
+</h3>
+
+<p>
+When configured thresholds are reached, the connected system
+can notify caregivers so they can provide appropriate support.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">⌁</div>
+
+<h3>
+Activity Awareness
+</h3>
+
+<p>
+Motion information provides context around changes in
+physiological signals and physical activity.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">☀</div>
+
+<h3>
+Environmental Monitoring
+</h3>
+
+<p>
+Light and environmental sound measurements can provide
+additional sensory context.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🔒</div>
+
+<h3>
+Privacy Focused
+</h3>
+
+<p>
+The system concept emphasizes secure data handling and
+collecting only information necessary for the intended purpose.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SENSORS ================= -->
+
+<section class="blue-section" id="sensors">
+
+<div class="container">
+
+<div class="section-title">
+
+<span class="eyebrow">
+Sensor Stack
+</span>
+
+<h2>
+Multimodal sensing for richer context
+</h2>
+
+<p>
+The NeuroSense prototype combines several sensing technologies
+to provide physiological, activity and environmental information.
+</p>
+
+</div>
+
+
+<div class="sensor-grid">
+
+
+<div class="sensor">
+
+<strong>♥ PPG</strong>
+
+<span>
+Heart rate and HRV-related measurements
+</span>
+
+</div>
+
+
+<div class="sensor">
+
+<strong>◉ GSR / EDA</strong>
+
+<span>
+Galvanic skin response / electrodermal activity
+</span>
+
+</div>
+
+
+<div class="sensor">
+
+<strong>♨ Temperature</strong>
+
+<span>
+Skin/body temperature trend
+</span>
+
+</div>
+
+
+<div class="sensor">
+
+<strong>O₂ SpO₂</strong>
+
+<span>
+Blood oxygen saturation
+</span>
+
+</div>
+
+
+<div class="sensor">
+
+<strong>↗ Accelerometer</strong>
+
+<span>
+Three-axis motion and activity
+</span>
+
+</div>
+
+
+<div class="sensor">
+
+<strong>☀ Light Sensor</strong>
+
+<span>
+Ambient light conditions
+</span>
+
+</div>
+
+
+<div class="sensor">
+
+<strong>♫ Noise Sensor</strong>
+
+<span>
+Environmental sound-level context
+</span>
+
+</div>
+
+
+<div class="sensor">
+
+<strong>◫ ESP32</strong>
+
+<span>
+Prototype processing and connectivity
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= DESIGN ================= -->
+
+<section>
+
+<div class="container split">
+
+
+<div class="split-image">
+
+<img
+src="assets/neurosense-concept.jpg"
+alt="NeuroSense wearable design"
+>
+
+</div>
+
+
+<div>
+
+<span class="eyebrow">
+Wearable Design
+</span>
+
+<h2 style="
+font-size:38px;
+line-height:1.15;
+color:#082b63;
+margin-top:10px;
+">
+A supportive wearable experience
+</h2>
+
+
+<div class="feature-list">
+
+
+<div class="feature-item">
+
+<div class="tick">✓</div>
+
+<div>
+
+<strong>
+Soft & Comfortable
+</strong>
+
+<span>
+The concept focuses on a lightweight and comfortable
+wearable form factor.
+</span>
+
+</div>
+
+</div>
+
+
+<div class="feature-item">
+
+<div class="tick">✓</div>
+
+<div>
+
+<strong>
+Adjustable Fit
+</strong>
+
+<span>
+An adjustable fastening system allows the band to fit
+different users comfortably.
+</span>
+
+</div>
+
+</div>
+
+
+<div class="feature-item">
+
+<div class="tick">✓</div>
+
+<div>
+
+<strong>
+Low-Distraction Interface
+</strong>
+
+<span>
+The wearable can communicate device status without
+requiring a large display.
+</span>
+
+</div>
+
+</div>
+
+
+<div class="feature-item">
+
+<div class="tick">✓</div>
+
+<div>
+
+<strong>
+Personalized Thresholds
+</strong>
+
+<span>
+Future versions can use individual baselines instead of
+one universal threshold.
+</span>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= WORKFLOW ================= -->
+
+<section class="blue-section" id="workflow">
+
+<div class="container">
+
+<div class="section-title">
+
+<span class="eyebrow">
+System Architecture
+</span>
+
+<h2>
+From sensor signal to caregiver support
+</h2>
+
+<p>
+A simplified view of how the NeuroSense system can operate.
+</p>
+
+</div>
+
+
+<div class="workflow">
+
+
+<div class="step">
+
+♥
+
+<strong>
+Sensors
+</strong>
+
+<small>
+Physiological + environmental
+</small>
+
+</div>
+
+
+<div class="arrow">→</div>
+
+
+<div class="step">
+
+◫
+
+<strong>
+Microcontroller
+</strong>
+
+<small>
+Data collection
+</small>
+
+</div>
+
+
+<div class="arrow">→</div>
+
+
+<div class="step">
+
+✦
+
+<strong>
+AI Processing
+</strong>
+
+<small>
+Pattern analysis
+</small>
+
+</div>
+
+
+<div class="arrow">→</div>
+
+
+<div class="step">
+
+🔔
+
+<strong>
+Caregiver App
+</strong>
+
+<small>
+Alerts & history
+</small>
+
+</div>
+
+
+</div>
+
+
+<div style="
+margin-top:30px;
+padding:18px;
+background:white;
+border-left:4px solid #1267c7;
+border-radius:10px;
+color:#40536c;
+font-size:14px;
+">
+
+<strong>Important:</strong>
+
+NeuroSense is presented as a prototype/project concept,
+not a medical diagnostic device. Physiological changes can
+have many causes and alerts should support, not replace,
+caregiver judgment and professional advice.
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= APP ================= -->
+
+<section id="app">
+
+<div class="container">
+
+<div class="app">
+
+<div class="app-grid">
+
+
+<div>
+
+<span class="eyebrow" style="color:#7fc0ff">
+Caregiver Companion
+</span>
+
+<h2>
+A clear view when it matters.
+</h2>
+
+<p>
+
+The NeuroSense companion application can provide a dashboard,
+live monitoring, alerts and historical trends to help caregivers
+understand patterns and respond according to an individual's
+support plan.
+
+</p>
+
+<br>
+
+<a href="#contact" class="btn btn-primary">
+Ask About NeuroSense
+</a>
+
+</div>
+
+
+<div class="phones">
+
+
+<div class="phone">
+
+<div class="phone-screen">
+
+<strong>NeuroSense</strong>
+
+<br><br>
+
+Stress
+
+<br>
+
+<b>LOW</b>
+
+<br><br>
+
+Heart Rate
+
+<br>
+
+<b>78 BPM</b>
+
+<br><br>
+
+━━━━━━<br>
+━━━╱━━<br>
+━━━━╱━
+
+</div>
+
+</div>
+
+
+<div class="phone">
+
+<div class="phone-screen">
+
+<strong>Alerts</strong>
+
+<br><br>
+
+🟢 Normal
+
+<br><br>
+
+No immediate alerts
+
+<br><br>
+
+Last update
+
+<br>
+
+2 min ago
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FAQ ================= -->
+
+<section>
+
+<div class="container">
+
+<div class="section-title">
+
+<span class="eyebrow">
+Questions
+</span>
+
+<h2>
+Frequently Asked Questions
+</h2>
+
+</div>
+
+
+<div class="faq">
+
+
+<details>
+
+<summary>
+Does NeuroSense diagnose autism?
+</summary>
+
+<p>
+No. NeuroSense is a prototype wearable monitoring concept.
+Physiological signals cannot independently diagnose autism,
+anxiety or a particular emotional state.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Why use multiple sensors?
+</summary>
+
+<p>
+Different physiological and environmental signals can provide
+complementary information and may provide better context than
+using a single measurement.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Can NeuroSense automatically intervene?
+</summary>
+
+<p>
+The current concept focuses on monitoring and caregiver
+notification. Any intervention should be designed with
+caregivers and qualified professionals.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+What are the next development steps?
+</summary>
+
+<p>
+Future development could include hardware prototyping,
+sensor calibration, personalized baseline collection,
+AI model validation, usability testing and security review.
+</p>
+
+</details>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="blue-section" id="contact">
+
+<div class="container">
+
+<div class="contact">
+
+<div class="section-title">
+
+<span class="eyebrow">
+Connect With NeuroSense
+</span>
+
+<h2>
+Have an enquiry?
+</h2>
+
+<p>
+Follow our project or contact the NeuroSense team directly.
+</p>
+
+</div>
+
+
+<div class="contact-box">
+
+
+<a
+class="social"
+href="mailto:neurosense.wearable@gmail.com"
+>
+✉️ Email Us
+<br>
+neurosense.wearable@gmail.com
+</a>
+
+
+<div class="socials">
+
+
+<a
+class="social"
+href="https://www.instagram.com/neuro_sense_wearable/?utm_source=qr"
+target="_blank"
+rel="noopener noreferrer"
+>
+📸 Instagram
+</a>
+
+
+<a
+class="social"
+href="https://www.linkedin.com/company/neurosense-wearables/"
+target="_blank"
+rel="noopener noreferrer"
+>
+💼 LinkedIn
+</a>
+
+
+</div>
+
+
+<p style="
+margin-top:25px;
+font-size:14px;
+color:#607089;
+">
+
+Click the email button to open your mail application,
+or follow NeuroSense on Instagram and LinkedIn.
+
+</p>
+
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="container footer-content">
+
+
+<div>
+
+<strong>
+NEUROSENSE
+</strong>
+
+<br>
+
+<small>
+AI-Based Wearable Monitoring & Emergency Alert System
+</small>
+
+</div>
+
+
+<div>
+
+<small>
+
+<a href="mailto:neurosense.wearable@gmail.com">
+Email
+</a>
+
+&nbsp; · &nbsp;
+
+<a
+href="https://www.instagram.com/neuro_sense_wearable/?utm_source=qr"
+target="_blank"
+>
+Instagram
+</a>
+
+&nbsp; · &nbsp;
+
+<a
+href="https://www.linkedin.com/company/neurosense-wearables/"
+target="_blank"
+>
+LinkedIn
+</a>
+
+</small>
+
+</div>
+
+
+<div>
+
+<small>
+© 2026 NeuroSense
+</small>
+
+</div>
+
+
+</div>
+
+</footer>
+
+</body>
+</html>
