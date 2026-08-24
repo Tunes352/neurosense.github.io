@@ -26,7 +26,7 @@ Backend:
 
 Important:
 The contact form stores enquiries in SQLite. It does not automatically send emails through Gmail because Gmail SMTP credentials/app configuration should not be placed in the website source. The website provides a direct mailto link to:
-neurosense.wearable@gmail.com
+neuro.sense04@gmail.com
 
 Social links included:
 Instagram:
