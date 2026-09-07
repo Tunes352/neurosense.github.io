@@ -25,17 +25,21 @@ body {
     color: #14233b;
     background: #f7fbff;
     line-height: 1.6;
+    padding-top: 72px;
 }
 
 /* ================= NAVBAR ================= */
 
 header {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
     background: rgba(255,255,255,0.96);
     border-bottom: 1px solid #dce7f2;
     backdrop-filter: blur(10px);
+    box-shadow: 0 1px 0 rgba(8,43,99,0.04);
 }
 
 .navbar {
@@ -47,37 +51,34 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 20px;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
-
-    font-size: 20px;
-    font-weight: 800;
-    color: #082b63;
+    justify-content: center;
+    text-decoration: none;
+    padding: 6px 0;
+    min-width: 150px;
+    flex-shrink: 0;
 }
 
-.logo-box {
-    width: 40px;
-    height: 40px;
-
-    border-radius: 12px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: white;
-    font-weight: bold;
-
-    background: linear-gradient(135deg,#082b63,#1267c7);
+.logo img {
+    width: 170px;
+    max-width: 45%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    border-radius: 50px;
 }
 
 nav {
     display: flex;
-    gap: 25px;
+    gap: 26px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 nav a {
@@ -204,6 +205,8 @@ h1 {
 
 .hero-image img {
     width: 100%;
+    max-height: 520px;
+    object-fit: contain;
 
     border-radius: 18px;
 
@@ -599,15 +602,17 @@ details p {
 }
 
 .contact-box {
-    background: white;
+    background: rgba(255,255,255,0.72);
 
-    border: 1px solid #d9e5f2;
+    border: 1px solid rgba(18, 103, 199, 0.22);
 
-    border-radius: 24px;
+    border-radius: 20px;
 
-    padding: 35px;
+    padding: 35px 28px;
 
-    box-shadow: 0 15px 45px rgba(8,43,99,0.07);
+    box-shadow: 0 10px 30px rgba(8,43,99,0.04);
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .socials {
@@ -623,9 +628,13 @@ details p {
 }
 
 .social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 170px;
     padding: 12px 18px;
 
-    background: white;
+    background: rgba(255,255,255,0.7);
 
     border: 1px solid #d9e5f2;
 
@@ -638,6 +647,16 @@ details p {
     text-decoration: none;
 
     transition: .2s;
+}
+
+.social.email-link {
+    display: block;
+    width: min(100%, 430px);
+    margin: 0 auto 20px;
+    padding: 18px 24px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 .social:hover {
@@ -738,12 +757,8 @@ footer a:hover {
 
 <div class="navbar">
 
-<a href="#home" class="logo">
-
-<span class="logo-box">NS</span>
-
-NEUROSENSE
-
+<a href="#home" class="logo" aria-label="NeuroSense home">
+    <img src="logo.png" alt="NeuroSense logo">
 </a>
 
 <nav>
@@ -813,16 +828,8 @@ See How It Works
 
 <div class="hero-image">
 
-<!--
-IMPORTANT:
-Upload your image to the repository at:
-
-assets/neurosense-concept.jpg
-
--->
-
 <img
-src="assets/neurosense-concept.jpg"
+src="protoype1.png"
 alt="NeuroSense wearable prototype"
 >
 
@@ -1000,7 +1007,7 @@ Multimodal sensing for richer context
 </h2>
 
 <p>
-The NeuroSense prototype combines several sensing technologies
+The NeuroSense system combines several sensing technologies
 to provide physiological, activity and environmental information.
 </p>
 
@@ -1092,7 +1099,7 @@ Environmental sound-level context
 <strong>◫ ESP32</strong>
 
 <span>
-Prototype processing and connectivity
+Embedded processing and connectivity
 </span>
 
 </div>
@@ -1110,17 +1117,6 @@ Prototype processing and connectivity
 <section>
 
 <div class="container split">
-
-
-<div class="split-image">
-
-<img
-src="assets/neurosense-concept.jpg"
-alt="NeuroSense wearable design"
->
-
-</div>
-
 
 <div>
 
@@ -1340,7 +1336,7 @@ font-size:14px;
 
 <strong>Important:</strong>
 
-NeuroSense is presented as a prototype/project concept,
+NeuroSense is presented as a concept platform,
 not a medical diagnostic device. Physiological changes can
 have many causes and alerts should support, not replace,
 caregiver judgment and professional advice.
@@ -1494,7 +1490,7 @@ Does NeuroSense diagnose autism?
 </summary>
 
 <p>
-No. NeuroSense is a prototype wearable monitoring concept.
+No. NeuroSense is a monitoring concept platform.
 Physiological signals cannot independently diagnose autism,
 anxiety or a particular emotional state.
 </p>
@@ -1562,13 +1558,13 @@ AI model validation, usability testing and security review.
 
 <div class="contact">
 
-<div class="section-title">
+<div class="section-title" style="margin-bottom: 28px;">
 
 <span class="eyebrow">
 Connect With NeuroSense
 </span>
 
-<h2>
+<h2 style="margin-top: 10px; margin-bottom: 10px;">
 Have an enquiry?
 </h2>
 
@@ -1583,7 +1579,7 @@ Follow our project or contact the NeuroSense team directly.
 
 
 <a
-class="social"
+class="social email-link"
 href="mailto:neuro.sense04@gmail.com"
 >
 ✉️ Email Us
