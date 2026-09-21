@@ -1,49 +1,1140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEUROSENSE AI Assistant</title>
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
-        body{background:#f4f8fb;min-height:100vh}
-        .chat-button{position:fixed;right:25px;bottom:25px;width:65px;height:65px;border:0;border-radius:50%;background:linear-gradient(135deg,#00c6ff,#0072ff);color:#fff;font-size:28px;cursor:pointer;box-shadow:0 8px 25px rgba(0,114,255,.35);z-index:1000;transition:.3s;display:flex;align-items:center;justify-content:center}
-        .chat-button:hover{transform:scale(1.08) rotate(5deg)}
-        .chat-container{position:fixed;right:25px;bottom:105px;width:380px;max-width:calc(100vw - 30px);height:600px;max-height:calc(100vh - 130px);background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,.2);display:none;flex-direction:column;z-index:999}
-        .chat-container.active{display:flex;animation:openChat .25s ease}
-        @keyframes openChat{from{opacity:0;transform:translateY(20px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
-        .chat-header{background:linear-gradient(135deg,#0066ff,#00b4db);color:#fff;padding:16px;display:flex;align-items:center;justify-content:space-between}
-        .header-left{display:flex;align-items:center;gap:12px}.bot-icon{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:22px}.bot-name{font-size:16px;font-weight:bold}.bot-status{font-size:11px;opacity:.9;display:flex;align-items:center;gap:5px;margin-top:2px}.status-dot{width:8px;height:8px;background:#2ed573;border-radius:50%}.header-actions{display:flex;gap:6px}.icon-button{border:0;background:rgba(255,255,255,.15);color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px}.icon-button:hover{background:rgba(255,255,255,.3)}
-        .chat-messages{flex:1;padding:16px;overflow-y:auto;background:#f7fafc;scroll-behavior:smooth}.message{display:flex;flex-direction:column;margin-bottom:14px;animation:fadeIn .2s ease-in}.message.bot{align-items:flex-start}.message.user{align-items:flex-end}@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-        .message-content{max-width:85%;padding:11px 15px;border-radius:16px;font-size:14px;line-height:1.5}.bot .message-content{background:#fff;color:#222;border-bottom-left-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.06)}.user .message-content{background:#0072ff;color:#fff;border-bottom-right-radius:4px}.message-reactions{display:flex;gap:6px;margin-top:4px;padding-left:4px}.reaction-btn{border:0;background:transparent;font-size:12px;cursor:pointer;opacity:.5}.reaction-btn:hover,.reaction-btn.selected{opacity:1;transform:scale(1.25)}
-        .quick-questions{padding:10px 14px;background:#fff;border-top:1px solid #eee;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}.quick-button{white-space:nowrap;border:1px solid #d5e3f0;background:#f7fbff;color:#0066cc;padding:6px 12px;border-radius:16px;cursor:pointer;font-size:12px;flex-shrink:0}.quick-button:hover{background:#0066cc;color:#fff;border-color:#0066cc}
-        .chat-input-area{display:flex;align-items:center;padding:12px;border-top:1px solid #eee;background:#fff}#userInput{flex:1;border:1px solid #e2e8f0;outline:0;background:#f8fafc;padding:10px 14px;border-radius:20px;font-size:14px}#userInput:focus{border-color:#0072ff;background:#fff}#sendButton{width:40px;height:40px;margin-left:8px;border:0;border-radius:50%;background:#0072ff;color:#fff;cursor:pointer;font-size:16px}#sendButton:hover{background:#005bb5;transform:scale(1.05)}
-        .typing{display:flex;gap:4px;padding:4px}.typing span{width:6px;height:6px;background:#a0aec0;border-radius:50%;animation:typing 1.2s infinite ease-in-out}.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}@keyframes typing{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-        @media(max-width:500px){.chat-container{right:0;bottom:0;width:100vw;height:100vh;max-width:100vw;max-height:100vh;border-radius:0}.chat-button{right:20px;bottom:20px}}
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuroSense | AI Wearable Monitoring</title>
+  <meta
+    name="description"
+    content="NeuroSense – AI-Based Wearable Monitoring and Emergency Alert System for Autism."
+  />
+  <style>
+    :root {
+      --navy: #082b63;
+      --navy-soft: #14233b;
+      --text: #607089;
+      --line: #d9e5f2;
+      --blue: #1267c7;
+      --blue-dark: #0b56aa;
+      --sky: #eef7ff;
+      --white: #ffffff;
+      --success: #12845d;
+      --light-green: #e2f8ef;
+      --bg: #f7fbff;
+      --shadow: rgba(8, 43, 99, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--navy-soft);
+      line-height: 1.6;
+      padding-top: 72px;
+    }
+    a { text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: 92%;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(18,103,199,0.2);
+    }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .btn-secondary {
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--navy);
+    }
+    .btn-secondary:hover { border-color: var(--blue); }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 0 rgba(8,43,99,0.04);
+    }
+    .navbar {
+      width: 92%;
+      max-width: 1150px;
+      margin: auto;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      flex-shrink: 0;
+    }
+    .logo img {
+      width: 170px;
+      max-width: 45%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 50px;
+    }
+    nav {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: #43546b;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    nav a:hover { color: var(--blue); }
+
+    .hero {
+      padding: 80px 0;
+      background:
+        radial-gradient(circle at 85% 10%,#dceeff,transparent 35%),
+        linear-gradient(180deg,#ffffff,#f4faff);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 55px;
+      align-items: center;
+    }
+    .eyebrow {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin-top: 15px;
+      font-size: clamp(42px, 6vw, 70px);
+      line-height: 1.03;
+      color: var(--navy);
+    }
+    .hero-text {
+      margin: 22px 0;
+      max-width: 650px;
+      font-size: 18px;
+      color: var(--text);
+    }
+    .buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .hero-image {
+      background: #fff;
+      padding: 12px;
+      border-radius: 25px;
+      border: 1px solid var(--line);
+      box-shadow: 0 25px 70px rgba(8,43,99,0.15);
+    }
+    .hero-image img {
+      width: 100%;
+      max-height: 520px;
+      object-fit: contain;
+      border-radius: 18px;
+    }
+
+    .trust {
+      padding: 18px 0;
+      background: #fff;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .trust-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: #52627a;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    section { padding: 80px 0; }
+    .section-title {
+      text-align: center;
+      max-width: 750px;
+      margin: 0 auto 45px;
+    }
+    .section-title h2 {
+      margin: 10px 0;
+      font-size: 38px;
+      line-height: 1.15;
+      color: var(--navy);
+    }
+    .section-title p { color: var(--text); }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .card {
+      padding: 26px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 12px 35px rgba(8,43,99,0.05);
+      transition: 0.25s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(8,43,99,0.1);
+    }
+    .icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: #eaf4ff;
+      color: var(--blue);
+      font-size: 22px;
+      margin-bottom: 17px;
+    }
+    .card h3 {
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-size: 1.25rem;
+    }
+    .card p { color: var(--text); font-size: 14px; }
+
+    .blue-section { background: var(--sky); }
+
+    .sensor-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+    .sensor {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      padding: 22px;
+    }
+    .sensor strong {
+      display: block;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+    .sensor span { font-size: 13px; color: var(--text); }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .split-image {
+      background: white;
+      padding: 12px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+    }
+    .split-image img {
+      width: 100%;
+      border-radius: 16px;
+    }
+    .feature-list {
+      display: grid;
+      gap:15px;
+      margin-top:25px;
+    }
+    .feature-item { display: flex; gap: 13px; }
+    .tick {
+      width: 26px; height: 26px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--light-green);
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .feature-item strong {
+      display: block;
+      color: var(--navy);
+    }
+    .feature-item span {
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .workflow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .step {
+      min-width: 160px;
+      padding: 20px;
+      text-align: center;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+    .step strong { display: block; color: var(--navy); }
+    .arrow {
+      color: var(--blue);
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .app {
+      background: #082b63;
+      color: #fff;
+      border-radius: 30px;
+      padding: 50px;
+    }
+    .app-grid {
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .app h2 {
+      font-size: 40px;
+      line-height: 1.15;
+      margin: 10px 0;
+    }
+    .app p { color: #c8d8ec; max-width: 650px; }
+    .phones {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+    .phone {
+      width: 120px;
+      height: 240px;
+      background: #111827;
+      border: 6px solid #273449;
+      border-radius: 22px;
+      padding: 10px;
+    }
+    .phone-screen {
+      height: 100%;
+      padding:12px;
+      border-radius:13px;
+      background: linear-gradient(#f8fcff,#dceeff);
+      color: var(--navy);
+      font-size: 10px;
+    }
+
+    .faq {
+      max-width: 800px;
+      margin: auto;
+      display: grid;
+      gap: 12px;
+    }
+    details {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 20px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--navy);
+    }
+    details p {
+      margin-top: 10px;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .contact {
+      max-width: 850px;
+      margin: auto;
+      text-align: center;
+    }
+    .contact-box {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(18, 103, 199, 0.22);
+      border-radius: 20px;
+      padding: 35px 28px;
+      box-shadow: 0 10px 30px rgba(8,43,99,0.04);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+    .social {
+      display: inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-width: 170px;
+      padding:12px 18px;
+      background: rgba(255,255,255,0.7);
+      border:1px solid var(--line);
+      border-radius:12px;
+      color: var(--navy);
+      font-weight:bold;
+      transition: .2s;
+    }
+    .social:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .social.email-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      width: min(100%, 430px);
+      margin: 0 auto 20px;
+      padding: 18px 24px;
+      text-align: left;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .social.email-link .email-text {
+      display: flex;
+      flex-direction: column;
+      align-items:flex-start;
+      gap: 2px;
+    }
+    .social.email-link .email-label { font-weight: 800; }
+    .social.email-link .email-address { font-size: 14px; color: #4d5f7e; font-weight: 600; }
+    .social svg { width: 18px; height: 18px; display:block; }
+    .social.email-link svg { color: #EA4335; }
+    .social.instagram svg { color: #E1306C; }
+    .social.linkedin svg { color: #0A66C2; }
+
+    footer {
+      padding: 40px 0;
+      background: #061d43;
+      color: #c6d5e9;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .footer-brand { display:flex; align-items:center; gap:14px; }
+    .footer-brand img {
+      width:44px; height:44px; border-radius:12px; object-fit:cover; display:block; box-shadow: 0 8px 20px rgba(18,103,199,0.2);
+    }
+    .footer-brand strong { color: white; display:block; font-size:20px; letter-spacing:0.04em; }
+    footer small { display:block; line-height: 1.8; }
+    footer a { color: #c6d5e9; }
+    footer a:hover { color: white; }
+    .footer-links {
+      display: inline-flex; align-items:center; gap:10px; flex-wrap: wrap;
+    }
+    .footer-link {
+      display: inline-flex; align-items:center; gap:7px; color: #c6d5e9;
+    }
+    .footer-link svg { width:14px; height:14px; display:block; }
+    .footer-link.email svg { color: #EA4335; }
+    .footer-link.instagram svg { color: #E1306C; }
+    .footer-link.linkedin svg { color: #0A66C2; }
+
+    @media (max-width: 850px) {
+      nav { display: none; }
+      .hero-grid, .split, .app-grid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
+      .sensor-grid { grid-template-columns: repeat(2, 1fr); }
+      .app { padding: 30px 22px; }
+    }
+    @media (max-width: 500px) {
+      .sensor-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 44px; }
+      .section-title h2 { font-size: 31px; }
+      .hero { padding: 55px 0; }
+    }
+
+    .chatbot-float {
+      position: fixed;
+      right: 25px;
+      bottom: 25px;
+      z-index: 1000;
+    }
+    .chatbot-button {
+      width: 65px;
+      height: 65px;
+      border: none;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0, 114, 255, 0.35);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .chatbot-button:hover { transform: scale(1.08) rotate(5deg); }
+    .chatbot-window {
+      position: fixed;
+      right: 25px;
+      bottom: 105px;
+      width: 380px;
+      max-width: calc(100vw - 30px);
+      height: 600px;
+      max-height: calc(100vh - 130px);
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      z-index: 999;
+    }
+    .chatbot-window.active {
+      display: flex;
+      animation: openChat 0.25s ease;
+    }
+    @keyframes openChat {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .chatbot-header {
+      background: linear-gradient(135deg, #0066ff, #00b4db);
+      color: white;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chatbot-header-left { display:flex; align-items:center; gap:12px; }
+    .chatbot-icon {
+      width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,0.2);
+      display:flex; align-items:center; justify-content:center; font-size:22px;
+    }
+    .chatbot-name { font-size: 16px; font-weight: bold; }
+    .chatbot-status {
+      font-size:11px; opacity:0.9; display:flex; align-items:center; gap:5px; margin-top:2px;
+    }
+    .chatbot-status-dot { width:8px; height:8px; background:#2ed573; border-radius:50%; }
+    .chatbot-actions { display:flex; gap:6px; }
+    .chatbot-action {
+      border:none; background: rgba(255,255,255,0.15); color:white; width:32px; height:32px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:14px;
+    }
+    .chatbot-action:hover { background: rgba(255,255,255,0.3); }
+    .chatbot-messages {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      background: #f7fafc;
+      scroll-behavior: smooth;
+    }
+    .chatbot-message {
+      display:flex; flex-direction:column; margin-bottom:14px; animation: fadeIn 0.2s ease-in;
+    }
+    .chatbot-message.user { align-items: flex-end; }
+    .chatbot-message.bot { align-items: flex-start; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .chatbot-message-content {
+      max-width:85%; padding:11px 15px; border-radius:16px; font-size:14px; line-height:1.5;
+    }
+    .chatbot-message.bot .chatbot-message-content {
+      background:white; color:#222; border-bottom-left-radius:4px; box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    }
+    .chatbot-message.user .chatbot-message-content {
+      background:#0072ff; color:white; border-bottom-right-radius:4px;
+    }
+    .chatbot-reactions {
+      display:flex; gap:6px; margin-top:4px; padding-left:4px;
+    }
+    .chatbot-reaction {
+      border:none; background:transparent; font-size:12px; cursor:pointer; opacity:0.5; transition: opacity 0.2s, transform 0.2s;
+    }
+    .chatbot-reaction:hover, .chatbot-reaction.selected { opacity:1; transform: scale(1.25); }
+    .chatbot-quick-questions {
+      padding:10px 14px; background:white; border-top:1px solid #eee; display:flex; gap:8px; overflow-x:auto; scrollbar-width:thin;
+    }
+    .chatbot-quick-questions::-webkit-scrollbar { height:4px; }
+    .chatbot-quick-questions::-webkit-scrollbar-thumb { background:#cbd5e0; border-radius:4px; }
+    .chatbot-quick-button {
+      white-space:nowrap; border:1px solid #d5e3f0; background:#f7fbff; color:#0066cc; padding:6px 12px; border-radius:16px; cursor:pointer; font-size:12px; flex-shrink:0;
+    }
+    .chatbot-quick-button:hover { background:#0066cc; color:white; border-color:#0066cc; }
+    .chatbot-input-area {
+      display:flex; align-items:center; padding:12px; border-top:1px solid #eee; background:white;
+    }
+    #neurosenseUserInput {
+      flex:1; border:1px solid #e2e8f0; outline:none; background:#f8fafc; padding:10px 14px; border-radius:20px; font-size:14px;
+    }
+    #neurosenseUserInput:focus { border-color: #0072ff; background:white; }
+    #neurosenseSendButton {
+      width: 40px; height: 40px; margin-left:8px; border:none; border-radius:50%; background:#0072ff; color:white; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center;
+    }
+    #neurosenseSendButton:hover { background:#005bb5; transform: scale(1.05); }
+    .chatbot-typing {
+      display:flex; gap:4px; padding:4px; align-items:center;
+    }
+    .chatbot-typing span {
+      width:6px; height:6px; background:#a0aec0; border-radius:50%; animation: typing 1.2s infinite ease-in-out;
+    }
+    .chatbot-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .chatbot-typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    @media (max-width: 500px) {
+      .chatbot-window {
+        right: 0; bottom: 0; width: 100vw; height: 100vh; max-width:100vw; max-height:100vh; border-radius:0;
+      }
+      .chatbot-float { right: 20px; bottom: 20px; }
+    }
+  </style>
 </head>
 <body>
-    <button class="chat-button" id="chatButton" aria-label="Open NEUROSENSE Assistant">🧠</button>
-    <div class="chat-container" id="chatContainer" role="dialog" aria-label="NEUROSENSE AI Assistant" aria-hidden="true">
-        <div class="chat-header"><div class="header-left"><div class="bot-icon">🧠</div><div><div class="bot-name">NEUROSENSE Assistant</div><div class="bot-status"><span class="status-dot"></span> Online</div></div></div><div class="header-actions"><button class="icon-button" id="clearButton" title="Clear History" aria-label="Clear history">🗑️</button><button class="icon-button" id="closeButton" title="Close Chat" aria-label="Close chat">✕</button></div></div>
-        <div class="chat-messages" id="chatMessages"></div><div class="quick-questions" id="quickQuestions"></div>
-        <div class="chat-input-area"><input type="text" id="userInput" placeholder="Ask about NEUROSENSE..." autocomplete="off"><button id="sendButton" aria-label="Send Message">➤</button></div>
+  <header>
+    <div class="navbar">
+      <a href="#home" class="logo" aria-label="NeuroSense home">
+        <img src="logo.png" alt="NeuroSense logo" />
+      </a>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#sensors">Sensors</a>
+        <a href="#workflow">How It Works</a>
+        <a href="#app">Caregiver App</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a href="#contact" class="btn btn-primary">Contact Us</a>
     </div>
-    <script>
-        const STORAGE_KEY='neurosense_chat_history';
-        let chatHistory=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
-        const defaultChips=['What is NEUROSENSE?','Sensors used','How does AI work?','Emergency alerts'];
-        const $=id=>document.getElementById(id),chatButton=$('chatButton'),chatContainer=$('chatContainer'),closeButton=$('closeButton'),clearButton=$('clearButton'),sendButton=$('sendButton'),userInput=$('userInput'),chatMessages=$('chatMessages'),quickQuestions=$('quickQuestions');
-        chatButton.addEventListener('click',toggleChat);closeButton.addEventListener('click',toggleChat);clearButton.addEventListener('click',clearHistory);sendButton.addEventListener('click',sendMessage);userInput.addEventListener('keydown',e=>{if(e.key==='Enter')sendMessage()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&chatContainer.classList.contains('active'))toggleChat()});
-        function toggleChat(){const active=chatContainer.classList.toggle('active');chatContainer.setAttribute('aria-hidden',String(!active));if(active){userInput.focus();chatMessages.scrollTop=chatMessages.scrollHeight}}
-        function initChat(){renderChips(defaultChips);if(!chatHistory.length){chatHistory.push({text:'👋 Hello! I\'m the <b>NEUROSENSE AI Assistant</b>.<br><br>I can help you understand the NEUROSENSE wearable, its sensors, AI analysis, location tracking, and emergency alert system.<br><br>How can I help you today?',sender:'bot',id:Date.now()});saveHistory()}renderHistory()}
-        function sendMessage(){const text=userInput.value.trim();if(!text)return;addMessage(text,'user');userInput.value='';showTyping();setTimeout(()=>{removeTyping();const response=generateResponse(text);addMessage(response.text,'bot');renderChips(response.nextChips||defaultChips)},600)}
-        function addMessage(text,sender){const msg={text,sender,id:Date.now()};chatHistory.push(msg);saveHistory();renderSingleMessage(msg)}
-        function renderSingleMessage(msg){const el=document.createElement('div');el.className='message '+msg.sender;const content=document.createElement('div');content.className='message-content';content.innerHTML=msg.text;el.appendChild(content);if(msg.sender==='bot'){const reactions=document.createElement('div');reactions.className='message-reactions';reactions.innerHTML='<button class="reaction-btn" aria-label="Helpful">👍</button><button class="reaction-btn" aria-label="Not helpful">👎</button>';reactions.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{reactions.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected')}));el.appendChild(reactions)}chatMessages.appendChild(el);chatMessages.scrollTop=chatMessages.scrollHeight}
-        function renderChips(chips){quickQuestions.innerHTML='';chips.forEach(chip=>{const btn=document.createElement('button');btn.className='quick-button';btn.textContent=chip;btn.onclick=()=>{userInput.value=chip;sendMessage()};quickQuestions.appendChild(btn)})}
-        function showTyping(){const el=document.createElement('div');el.className='message bot';el.id='typingIndicator';el.innerHTML='<div class="message-content"><div class="typing"><span></span><span></span><span></span></div></div>';chatMessages.appendChild(el);chatMessages.scrollTop=chatMessages.scrollHeight}function removeTyping(){const el=$('typingIndicator');if(el)el.remove()}function saveHistory(){localStorage.setItem(STORAGE_KEY,JSON.stringify(chatHistory))}function renderHistory(){chatMessages.innerHTML='';chatHistory.forEach(renderSingleMessage)}function clearHistory(){chatHistory=[];localStorage.removeItem(STORAGE_KEY);initChat()}
-        function generateResponse(message){const text=message.toLowerCase();if(/hello|hi|hey/.test(text))return{text:'👋 Hello!<br><br>I\'m ready to answer questions about the NEUROSENSE wearable, its sensors, or tracking system.',nextChips:['What is NEUROSENSE?','Sensors used','How it works']};if(text.includes('what is neurosense')||text.includes('about neurosense')||text==='neurosense')return{text:'<b>NEUROSENSE</b> is an AI-based wearable monitoring and emergency alert system designed to support non-invasive tracking for autistic children.<br><br>It standardizes physiological metrics and identifies pattern shifts to assist caregivers preemptively.',nextChips:['Sensors used','How does AI work?','Emergency alerts']};if(text.includes('sensor')||text.includes('hardware'))return{text:'NEUROSENSE can leverage modular sensors:<br><br>❤️ Heart-rate sensor<br>🩸 SpO₂ pulse oximeter<br>🏃 Accelerometer<br>🔄 Gyroscope<br>🌡️ Temperature sensor<br>📍 GPS/location module',nextChips:['6-axis gyroscope','Heart rate tracking','GPS location']};if(text.includes('gyro')||text.includes('6 axis'))return{text:'A <b>6-axis motion sensor</b> combines a 3-axis accelerometer and a 3-axis gyroscope.<br><br>It helps NEUROSENSE analyze fine body movements, spatial orientation, and physical activity patterns.'};if(text.includes('ai')||text.includes('artificial intelligence')||text.includes('mental state'))return{text:'🧠 The AI component correlates baseline physiological signals over time using multi-sensor data.<br><br>By analyzing pattern shifts, it provides approximate state-change notifications to caregivers without direct medical intervention.',nextChips:['Emergency alerts','Data privacy','Sensors used']};if(text.includes('emergency')||text.includes('alert')||text.includes('danger'))return{text:'🚨 Alerts transmit real-time telemetry, location data, and relevant sensor signals directly to the caregiver application when predefined thresholds are met.',nextChips:['GPS location','NEUROSENSE app','Sensors used']};if(text.includes('location')||text.includes('gps')||text.includes('track'))return{text:'📍 The integrated GPS module tracks the device coordinates, enabling caregivers to view real-time position data through the companion mobile app.',nextChips:['NEUROSENSE app','Emergency alerts','Sensors used']};if(text.includes('app')||text.includes('application'))return{text:'📱 The companion app provides caregivers with a centralized dashboard displaying heart rate, movement trends, temperature readings, GPS location, and system alerts.',nextChips:['Data privacy','Emergency alerts','Sensors used']};if(text.includes('privacy')||text.includes('data')||text.includes('security'))return{text:'🔐 Encrypted transmission protocols safeguard incoming sensor telemetry, ensuring access is restricted to authorized caregivers.',nextChips:['NEUROSENSE app','Emergency alerts','Sensors used']};return{text:'🤔 I didn\'t quite catch that. Try selecting a suggested topic or ask about specific hardware details:',nextChips:defaultChips}}
-        initChat();
-    </script>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">AI-Based Wearable Monitoring & Emergency Alert System</span>
+        <h1>Understand.<br />Alert.<br />Support.</h1>
+        <p class="hero-text">
+          NeuroSense is an AI-based wearable monitoring concept designed to continuously observe
+          physiological and environmental signals and provide timely information to caregivers when patterns
+          associated with stress or sensory overload are detected.
+        </p>
+        <div class="buttons">
+          <a href="#features" class="btn btn-primary">Discover NeuroSense →</a>
+          <a href="#workflow" class="btn btn-secondary">See How It Works</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="protoype1.png" alt="NeuroSense wearable prototype" />
+      </div>
+    </div>
+  </section>
+
+  <div class="trust">
+    <div class="container trust-row">
+      <span>♥ Real-time Monitoring</span>
+      <span>◉ Multimodal Sensors</span>
+      <span>⚡ AI-Assisted Analysis</span>
+      <span>🔔 Caregiver Alerts</span>
+      <span>🔒 Privacy-Focused</span>
+    </div>
+  </div>
+
+  <section id="features">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">Core Capabilities</span>
+        <h2>One wearable. Multiple signals. Smarter support.</h2>
+        <p>NeuroSense combines physiological and contextual measurements to provide a broader picture rather than relying on one signal.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="icon">♥</div>
+          <h3>Physiological Monitoring</h3>
+          <p>Monitors heart rate, HRV-related measures, skin conductance, and temperature to help detect stress patterns over time.</p>
+        </div>
+        <div class="card">
+          <div class="icon">◌</div>
+          <h3>Environmental Awareness</h3>
+          <p>Tracks context including motion, sound exposure, and environmental conditions to correlate bodily change with triggers.</p>
+        </div>
+        <div class="card">
+          <div class="icon">⚡</div>
+          <h3>AI-Powered Insights</h3>
+          <p>Uses pattern recognition across multiple signals to support early indication of rising discomfort or sensory overload.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sensors" class="blue-section">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">Sensor Suite</span>
+        <h2>Built from complementary signals.</h2>
+      </div>
+
+      <div class="sensor-grid">
+        <div class="sensor"><strong>Heart Rate</strong><span>Tracks pulse patterns and variability for stress-related changes.</span></div>
+        <div class="sensor"><strong>SpO₂</strong><span>Measures oxygen saturation to support broader physiological awareness.</span></div>
+        <div class="sensor"><strong>Accelerometer</strong><span>Captures movement intensity, restlessness, and activity patterns.</span></div>
+        <div class="sensor"><strong>Gyroscope</strong><span>Helps identify orientation and motion dynamics with a 6-axis sensor setup.</span></div>
+        <div class="sensor"><strong>Temperature</strong><span>Monitors thermal changes associated with stress or discomfort.</span></div>
+        <div class="sensor"><strong>Skin Conductance</strong><span>Signals fluctuations linked to arousal and sensory response.</span></div>
+        <div class="sensor"><strong>GPS</strong><span>Provides location tracking for safer, faster caregiver awareness.</span></div>
+        <div class="sensor"><strong>Context Sensors</strong><span>Complements physiological data with environmental triggers and activity context.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container split">
+      <div class="split-image">
+        <img src="protoype1.png" alt="NeuroSense monitoring concept" />
+      </div>
+      <div>
+        <span class="eyebrow">Why It Matters</span>
+        <h2 style="font-size:38px; line-height:1.15; color: var(--navy); margin: 10px 0 0;">Support that catches patterns earlier.</h2>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="tick">✓</div>
+            <div>
+              <strong>Real-time monitoring</strong>
+              <span>Continuous signal collection helps caregivers understand changes as they happen.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="tick">✓</div>
+            <div>
+              <strong>Context-aware interpretation</strong>
+              <span>Physiology is reviewed alongside activity and environmental cues instead of in isolation.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="tick">✓</div>
+            <div>
+              <strong>Timely caregiver alerts</strong>
+              <span>When thresholds are crossed, caregivers are notified with relevant data and location context.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="workflow" class="blue-section">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">How It Works</span>
+        <h2>From signal to support.</h2>
+      </div>
+
+      <div class="workflow">
+        <div class="step"><strong>1</strong><span>Collect data</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><strong>2</strong><span>Correlate signals</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><strong>3</strong><span>Detect pattern shifts</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><strong>4</strong><span>Alert caregivers</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="app">
+    <div class="container app">
+      <div class="app-grid">
+        <div>
+          <span class="eyebrow" style="color: #b9d6ff;">Caregiver App</span>
+          <h2>One dashboard. Clearer decisions.</h2>
+          <p>NeuroSense is designed to help caregivers stay informed with a simplified view of physiological trends, environmental context, and alert activity.</p>
+        </div>
+        <div class="phones">
+          <div class="phone"><div class="phone-screen"><strong>Live</strong><br />Heart 82<br />Temp 32.6°C<br />GPS: Active</div></div>
+          <div class="phone"><div class="phone-screen"><strong>Alert</strong><br />Stress rise<br />Check context<br />Contact caregiver</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">FAQ</span>
+        <h2>Common questions.</h2>
+      </div>
+
+      <div class="faq">
+        <details open>
+          <summary>What is NeuroSense?</summary>
+          <p>NeuroSense is a concept for an AI-based wearable and alert platform focused on monitoring signals associated with stress and sensory overload.</p>
+        </details>
+        <details>
+          <summary>Who is it designed for?</summary>
+          <p>It is intended to support caregivers who need broader visibility into a child’s physiological and environmental patterns.</p>
+        </details>
+        <details>
+          <summary>How does the alert system work?</summary>
+          <p>When sensor readings exceed or shift beyond predefined patterns, relevant information is delivered to authorized caregivers for faster response.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="blue-section">
+    <div class="container contact">
+      <div class="section-title">
+        <span class="eyebrow">Contact</span>
+        <h2>Get in touch with NeuroSense.</h2>
+      </div>
+
+      <div class="contact-box">
+        <a href="mailto:contact@neurosense.ai" class="social email-link">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6.75A2.75 2.75 0 0 1 6.75 4h10.5A2.75 2.75 0 0 1 20 6.75v10.5A2.75 2.75 0 0 1 17.25 20H6.75A2.75 2.75 0 0 1 4 17.25V6.75Zm2.2-.75 6.8 5.5 6.8-5.5H6.2Zm13.05 2.43-6.68 5.45a1 1 0 0 1-1.14 0L4.75 8.43v8.82c0 .69.56 1.25 1.25 1.25h11.99c.69 0 1.25-.56 1.25-1.25V8.43Z" fill="currentColor"/></svg>
+          <span class="email-text">
+            <span class="email-label">Email us</span>
+            <span class="email-address">contact@neurosense.ai</span>
+          </span>
+        </a>
+
+        <div class="socials">
+          <a href="https://www.instagram.com" class="social instagram" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2Zm0 2A2.8 2.8 0 1 0 14.8 12 2.8 2.8 0 0 0 12 9.2Zm5.25-3.45a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25Z"/></svg>
+            Instagram
+          </a>
+          <a href="https://www.linkedin.com" class="social linkedin" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 8.5A1.56 1.56 0 1 1 6.93 5.4a1.56 1.56 0 0 1 .01 3.1ZM5.5 9.7h2.82v9.3H5.5V9.7Zm5.12 0h2.7v1.27h.04c.38-.72 1.31-1.47 2.7-1.47 2.89 0 3.42 1.9 3.42 4.37V19H17.7v-17.2h-2.82V9.7h-.04Z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <img src="logo.png" alt="NeuroSense brand icon" />
+        <div>
+          <strong>NeuroSense</strong>
+          <small>AI wearable monitoring for smarter support.</small>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a class="footer-link email" href="mailto:contact@neurosense.ai">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 6.75A2.75 2.75 0 0 1 6.75 4h10.5A2.75 2.75 0 0 1 20 6.75v10.5A2.75 2.75 0 0 1 17.25 20H6.75A2.75 2.75 0 0 1 4 17.25V6.75Zm2.2-.75 6.8 5.5 6.8-5.5H6.2Zm13.05 2.43-6.68 5.45a1 1 0 0 1-1.14 0L4.75 8.43v8.82c0 .69.56 1.25 1.25 1.25h11.99c.69 0 1.25-.56 1.25-1.25V8.43Z"/></svg>
+          Email
+        </a>
+        <a class="footer-link instagram" href="https://www.instagram.com" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2Zm0 2A2.8 2.8 0 1 0 14.8 12 2.8 2.8 0 0 0 12 9.2Zm5.25-3.45a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25Z"/></svg>
+          Instagram
+        </a>
+        <a class="footer-link linkedin" href="https://www.linkedin.com" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 8.5A1.56 1.56 0 1 1 6.93 5.4a1.56 1.56 0 0 1 .01 3.1ZM5.5 9.7h2.82v9.3H5.5V9.7Zm5.12 0h2.7v1.27h.04c.38-.72 1.31-1.47 2.7-1.47 2.89 0 3.42 1.9 3.42 4.37V19H17.7v-17.2h-2.82V9.7h-.04Z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="chatbot-float">
+    <button class="chatbot-button" id="neurosenseChatButton" aria-label="Open NEUROSENSE Assistant">🧠</button>
+  </div>
+
+  <div class="chatbot-window" id="neurosenseChatWindow" role="dialog" aria-label="NEUROSENSE AI Assistant" aria-hidden="true">
+    <div class="chatbot-header">
+      <div class="chatbot-header-left">
+        <div class="chatbot-icon">🧠</div>
+        <div>
+          <div class="chatbot-name">NEUROSENSE Assistant</div>
+          <div class="chatbot-status"><span class="chatbot-status-dot"></span> Online</div>
+        </div>
+      </div>
+      <div class="chatbot-actions">
+        <button class="chatbot-action" id="neurosenseClearButton" title="Clear history" aria-label="Clear history">🗑️</button>
+        <button class="chatbot-action" id="neurosenseCloseButton" title="Close chat" aria-label="Close chat">✕</button>
+      </div>
+    </div>
+
+    <div class="chatbot-messages" id="neurosenseChatMessages"></div>
+    <div class="chatbot-quick-questions" id="neurosenseQuickQuestions"></div>
+    <div class="chatbot-input-area">
+      <input type="text" id="neurosenseUserInput" placeholder="Ask about NEUROSENSE..." autocomplete="off" />
+      <button id="neurosenseSendButton" aria-label="Send message">➤</button>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'neurosense_chat_history';
+    let chatHistory = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const defaultChips = ['What is NEUROSENSE?', 'Sensors used', 'How does AI work?', 'Emergency alerts'];
+
+    const chatButton = document.getElementById('neurosenseChatButton');
+    const chatWindow = document.getElementById('neurosenseChatWindow');
+    const closeButton = document.getElementById('neurosenseCloseButton');
+    const clearButton = document.getElementById('neurosenseClearButton');
+    const sendButton = document.getElementById('neurosenseSendButton');
+    const userInput = document.getElementById('neurosenseUserInput');
+    const chatMessages = document.getElementById('neurosenseChatMessages');
+    const quickQuestions = document.getElementById('neurosenseQuickQuestions');
+
+    function playAudioFeedback(type) {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        if (type === 'send') {
+          osc.frequency.setValueAtTime(400, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.08);
+          gain.gain.setValueAtTime(0.04, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.08);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.08);
+        } else {
+          osc.frequency.setValueAtTime(600, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.1);
+          gain.gain.setValueAtTime(0.04, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.1);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.1);
+        }
+      } catch (e) {
+        // Ignore audio errors for unsupported browsers
+      }
+    }
+
+    function toggleChat() {
+      const active = chatWindow.classList.toggle('active');
+      chatWindow.setAttribute('aria-hidden', String(!active));
+      if (active) {
+        userInput.focus();
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+    }
+
+    function saveHistory() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(chatHistory));
+    }
+
+    function showTyping() {
+      const typing = document.createElement('div');
+      typing.className = 'chatbot-message bot';
+      typing.id = 'chatbotTypingIndicator';
+      typing.innerHTML = '<div class="chatbot-message-content"><div class="chatbot-typing"><span></span><span></span><span></span></div></div>';
+      chatMessages.appendChild(typing);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeTyping() {
+      const typing = document.getElementById('chatbotTypingIndicator');
+      if (typing) typing.remove();
+    }
+
+    function renderSingleMessage(msg) {
+      const messageEl = document.createElement('div');
+      messageEl.className = 'chatbot-message ' + msg.sender;
+
+      const contentEl = document.createElement('div');
+      contentEl.className = 'chatbot-message-content';
+      contentEl.innerHTML = msg.text;
+      messageEl.appendChild(contentEl);
+
+      if (msg.sender === 'bot') {
+        const reactions = document.createElement('div');
+        reactions.className = 'chatbot-reactions';
+        reactions.innerHTML = '<button class="chatbot-reaction" aria-label="Helpful">👍</button><button class="chatbot-reaction" aria-label="Not helpful">👎</button>';
+        reactions.querySelectorAll('button').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            reactions.querySelectorAll('button').forEach((b) => b.classList.remove('selected'));
+            btn.classList.add('selected');
+          });
+        });
+        messageEl.appendChild(reactions);
+      }
+
+      chatMessages.appendChild(messageEl);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function renderHistory() {
+      chatMessages.innerHTML = '';
+      chatHistory.forEach(renderSingleMessage);
+    }
+
+    function renderChips(chips) {
+      quickQuestions.innerHTML = '';
+      chips.forEach((chip) => {
+        const button = document.createElement('button');
+        button.className = 'chatbot-quick-button';
+        button.textContent = chip;
+        button.addEventListener('click', () => {
+          userInput.value = chip;
+          sendMessage();
+        });
+        quickQuestions.appendChild(button);
+      });
+    }
+
+    function addMessage(text, sender) {
+      const msg = { text, sender, id: Date.now() };
+      chatHistory.push(msg);
+      saveHistory();
+      renderSingleMessage(msg);
+    }
+
+    function clearHistory() {
+      chatHistory = [];
+      localStorage.removeItem(STORAGE_KEY);
+      initChat();
+    }
+
+    function initChat() {
+      renderChips(defaultChips);
+      if (!chatHistory.length) {
+        chatHistory.push({
+          text: "👋 Hello! I'm the <b>NEUROSENSE AI Assistant</b>.<br><br>I can help you understand the NEUROSENSE wearable, its sensors, AI analysis, location tracking, and emergency alert system.<br><br>How can I help you today?",
+          sender: 'bot',
+          id: Date.now()
+        });
+        saveHistory();
+      }
+      renderHistory();
+    }
+
+    function generateResponse(message) {
+      const text = message.toLowerCase();
+
+      if (/hello|hi|hey/.test(text)) {
+        return {
+          text: "👋 Hello!<br><br>I'm ready to answer any questions about the NEUROSENSE wearable, its sensors, or tracking system.",
+          nextChips: ['What is NEUROSENSE?', 'Sensors used', 'How it works']
+        };
+      }
+
+      if (text.includes('what is neurosense') || text.includes('about neurosense') || text === 'neurosense') {
+        return {
+          text: '<b>NEUROSENSE</b> is an AI-based wearable monitoring and emergency alert system designed to support non-invasive tracking for autistic children.<br><br>It standardizes physiological metrics and identifies pattern shifts to assist caregivers preemptively.',
+          nextChips: ['Sensors used', 'How does AI work?', 'Emergency alerts']
+        };
+      }
+
+      if (text.includes('sensor') || text.includes('hardware')) {
+        return {
+          text: 'NEUROSENSE can leverage various modular sensors:<br><br>❤️ Heart-rate sensor<br>🩸 SpO₂ pulse oximeter<br>🏃 Accelerometer<br>🔄 Gyroscope<br>🌡️ Temperature sensor<br>📍 GPS/location module',
+          nextChips: ['6-axis gyroscope', 'Heart rate tracking', 'GPS location']
+        };
+      }
+
+      if (text.includes('gyro') || text.includes('gyroscope') || text.includes('6 axis')) {
+        return {
+          text: 'A <b>6-axis motion sensor</b> combines a 3-axis accelerometer and a 3-axis gyroscope.<br><br>It helps NEUROSENSE analyze fine body movements, spatial orientation, and physical activity patterns.',
+          nextChips: ['Sensors used', 'How does AI work?', 'Emergency alerts']
+        };
+      }
+
+      if (text.includes('ai') || text.includes('artificial intelligence') || text.includes('mental state')) {
+        return {
+          text: '🧠 The AI component correlates baseline physiological signals over time using multi-sensor data.<br><br>By analyzing pattern shifts, it provides approximate state-change notifications to caregivers without direct medical intervention.',
+          nextChips: ['Emergency alerts', 'Data privacy', 'Sensors used']
+        };
+      }
+
+      if (text.includes('emergency') || text.includes('alert') || text.includes('danger')) {
+        return {
+          text: '🚨 Alerts transmit real-time telemetry, location data, and relevant sensor signals directly to the caregiver\'s application when predefined thresholds are met.',
+          nextChips: ['GPS location', 'NEUROSENSE app', 'Sensors used']
+        };
+      }
+
+      if (text.includes('location') || text.includes('gps') || text.includes('track')) {
+        return {
+          text: '📍 The integrated GPS module tracks the device\'s geographic coordinates, enabling caregivers to view real-time position data through the companion mobile app.',
+          nextChips: ['NEUROSENSE app', 'Emergency alerts', 'Sensors used']
+        };
+      }
+
+      if (text.includes('app') || text.includes('application')) {
+        return {
+          text: '📱 The companion app provides caregivers with a centralized dashboard displaying heart rate, movement trends, temperature readings, GPS location, and system alerts.',
+          nextChips: ['Data privacy', 'Emergency alerts', 'Sensors used']
+        };
+      }
+
+      if (text.includes('privacy') || text.includes('data') || text.includes('security')) {
+        return {
+          text: '🔐 Encrypted transmission protocols safeguard incoming sensor telemetry, ensuring access is strictly restricted to authorized caregivers.',
+          nextChips: ['NEUROSENSE app', 'Emergency alerts', 'Sensors used']
+        };
+      }
+
+      return {
+        text: "🤔 I didn't quite catch that. Try selecting one of the suggested topics below or ask about specific hardware details:",
+        nextChips: defaultChips
+      };
+    }
+
+    function sendMessage() {
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      addMessage(text, 'user');
+      userInput.value = '';
+      playAudioFeedback('send');
+      showTyping();
+
+      setTimeout(() => {
+        removeTyping();
+        const response = generateResponse(text);
+        addMessage(response.text, 'bot');
+        renderChips(response.nextChips || defaultChips);
+        playAudioFeedback('receive');
+      }, 600);
+    }
+
+    chatButton.addEventListener('click', toggleChat);
+    closeButton.addEventListener('click', toggleChat);
+    clearButton.addEventListener('click', clearHistory);
+    sendButton.addEventListener('click', sendMessage);
+    userInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && chatWindow.classList.contains('active')) {
+        toggleChat();
+      }
+    });
+
+    initChat();
+  </script>
 </body>
 </html>
